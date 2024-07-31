@@ -22,6 +22,6 @@ export function likeCard(item) {
 }
 
 // Функция-обработчик события удаления карточки
-export function deleteCard (item) {
+export function deleteCard(item) {
   item.remove();
 }
