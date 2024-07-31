@@ -1,7 +1,7 @@
 import '../pages/index.css';
 import { initialCards } from './cards.js';
 import { createCard, likeCard, deleteCard } from './card.js';
-import { openModal, closeModal, closeButtonOverlay } from './modal.js';
+import { openModal, closeModal, setEventListeners } from './modal.js';
 
 // Темплейт карточки
 const cardsContainer = document.querySelector('.places__list');
@@ -65,9 +65,9 @@ buttonEditProfile.addEventListener('click', () => {
 });
 
 //Закрытие попапов
-closeButtonOverlay(popupTypeEdit);
-closeButtonOverlay(popupTypeNewCard);
-closeButtonOverlay(popupTypeImage);
+setEventListeners(popupTypeEdit);
+setEventListeners(popupTypeNewCard);
+setEventListeners(popupTypeImage);
 
 //Добавление анимации попапам
 popup.forEach((item) => {

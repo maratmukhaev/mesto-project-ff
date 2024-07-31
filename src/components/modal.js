@@ -19,7 +19,7 @@ function closeEsc(evt) {
 };
 
 //Закрытие попапа кликом по крестику и оверлею
-export function closeButtonOverlay (modal) {
+export function setEventListeners (modal) {
   const popupClose = modal.querySelector('.popup__close');
   popupClose.addEventListener('click', () => {
     closeModal(modal);
