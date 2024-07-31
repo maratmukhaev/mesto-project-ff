@@ -11,17 +11,17 @@ export function createCard (item, openImage, likeCard, deleteCard) {
   cardTitle.textContent = item.name;
   cardImage.alt = item.name;
   cardImage.addEventListener('click', () => openImage(item));
-  likeButton.addEventListener('click', likeCard);
-  deleteButton.addEventListener('click', deleteCard);
+  likeButton.addEventListener('click', () => likeCard(likeButton));
+  deleteButton.addEventListener('click', () => deleteCard(card));
   return card;
 }
 
 //Функция-обработчик события лайка карточки
-export function likeCard(evt) {
-  evt.target.classList.toggle('card__like-button_is-active');
+export function likeCard(item) {
+  item.classList.toggle('card__like-button_is-active');
 }
 
 // Функция-обработчик события удаления карточки
-export function deleteCard(evt) {
-  evt.target.closest('.card').remove();
+export function deleteCard (item) {
+  item.remove();
 }
