@@ -25,7 +25,7 @@ export function setEventListeners (modal) {
     closeModal(modal);
   });
   modal.addEventListener('mousedown', (evt) => {
-    if (evt.target === modal) {
+    if (evt.target.classList.contains('popup')) {
       closeModal(modal);
     }
   });
