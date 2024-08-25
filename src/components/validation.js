@@ -1,12 +1,3 @@
-export const validationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-};
-
 //Показ ошибки валидации
 const showInputError = (formElement, inputElement, errorMessage, validationConfig) => {
   const inputError = formElement.querySelector(`.${inputElement.id}-error`);
@@ -19,6 +10,7 @@ const showInputError = (formElement, inputElement, errorMessage, validationConfi
 const hideInputError = (formElement, inputElement, validationConfig) => {
   const inputError = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(validationConfig.inputErrorClass);
+  inputElement.setCustomValidity('');
   inputError.classList.remove(validationConfig.errorClass);
   inputError.textContent = '';
 };

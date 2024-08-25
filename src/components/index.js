@@ -1,7 +1,7 @@
 import '../pages/index.css';
 import { createCard, likeCard, deleteCard } from './card.js';
 import { openModal, closeModal, setEventListeners } from './modal.js';
-import { enableValidation, clearValidation, validationConfig } from './validation.js';
+import { enableValidation, clearValidation } from './validation.js';
 import { getUserInfo, getInitialCards, sendUserInfo, sendNewCard, changeAvatar } from './api.js';
 
 // Темплейт карточки
@@ -29,6 +29,15 @@ const popupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
 const profileImage = document.querySelector('.profile__image');
 
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
+
 //Замена текста на кнопке при загрузке данных
 function renderLoading(popupType, isLoading) {
   const popupButton = popupType.querySelector('.popup__button');
@@ -47,6 +56,7 @@ function editProfileSubmit(evt) {
   .then((data) => {
     profileTitle.textContent = data.name;
     profileDescription.textContent = data.about;
+    closeModal(popupTypeEdit);
   }) 
   .catch((err) => {
     console.log(err);
@@ -54,7 +64,6 @@ function editProfileSubmit(evt) {
   .finally(() => {
     renderLoading(popupTypeEdit, false);
   });
-  closeModal(popupTypeEdit);
 }
 
 //Редактирование аватара
@@ -64,6 +73,7 @@ function editAvatarSubmit(evt) {
   changeAvatar(linkAvatarInput.value)
   .then((data) => {
     profileImage.style.backgroundImage = `url(${data.avatar})`;
+    closeModal(popupTypeEditAvatar);
   }) 
   .catch((err) => {
     console.log(err);
@@ -71,8 +81,6 @@ function editAvatarSubmit(evt) {
   .finally(() => {
     renderLoading(popupTypeEditAvatar, false);
   });
-  closeModal(popupTypeEditAvatar);
-  formEditAvatar.reset();
 }
 
 //Добавление новой карточки
@@ -82,6 +90,7 @@ function addCardSubmit(evt) {
   sendNewCard(placeInput.value, linkInput.value)
   .then((item) => {
     cardsContainer.prepend(createCard(item, openImage, likeCard, userId, deleteCard));
+    closeModal(popupTypeNewCard);
   }) 
   .catch((err) => {
     console.log(err);
@@ -89,8 +98,6 @@ function addCardSubmit(evt) {
   .finally(() => {
     renderLoading(popupTypeNewCard, false);
   });
-  closeModal(popupTypeNewCard);
-  formNewPlace.reset();
 }
 
 //Открытие попапа изображения карточки

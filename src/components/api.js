@@ -6,17 +6,19 @@ const config = {
   }
 }
 
+const checkStatus = (res) => {
+  if (res.ok) {
+    return res.json();  
+  }
+  return Promise.reject(`Ошибка: ${res.status}`);
+}
+
 //Запрос информации о пользователе с сервера
 export const getUserInfo = () => {
   return fetch(`${config.baseUrl}/users/me`, {
     headers: config.headers
   })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  });
+  .then(checkStatus);
 }
 
 //Запрос списка карточек с сервера
@@ -24,12 +26,7 @@ export const getInitialCards = () => {
     return fetch(`${config.baseUrl}/cards`, {
       headers: config.headers
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(checkStatus);
 }
 
 //Обновление профиля пользователя
@@ -42,12 +39,7 @@ export const sendUserInfo = (userName, userAbout) => {
       about: userAbout
     })
   })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  });
+  .then(checkStatus);
 }
 
 //Обновление аватара
@@ -59,12 +51,7 @@ export const changeAvatar = (avatarLink) => {
       avatar: avatarLink
     })
   })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  });
+  .then(checkStatus);
 }
 
 //Добавление новой карточки
@@ -77,12 +64,7 @@ export const sendNewCard = (cardName, cardLink) => {
       link: cardLink
     })
   })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  });
+  .then(checkStatus);
 }
 
 //Удаление карточки
@@ -94,12 +76,7 @@ export const deleteDataCard = (cardId) => {
       _id: cardId
     })
   })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  });
+  .then(checkStatus);
 }
 
 //Отправка лайка
@@ -111,12 +88,7 @@ export const likeDataCard = (cardId) => {
       _id: cardId
     })
   })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  });
+  .then(checkStatus);
 }
 
 //Удаление лайка
@@ -128,11 +100,5 @@ export const deleteLikeDataCard = (cardId) => {
       _id: cardId
     })
   })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  });
+  .then(checkStatus);
 }
-
