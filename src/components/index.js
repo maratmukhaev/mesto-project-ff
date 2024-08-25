@@ -38,7 +38,6 @@ function renderLoading(popupType, isLoading) {
     popupButton.textContent = 'Сохранить';
   }
 }
-console.log()
 
 //Редактирование профиля
 function editProfileSubmit(evt) {
